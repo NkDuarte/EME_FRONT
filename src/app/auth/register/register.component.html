@@ -1,0 +1,42 @@
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            @if (success) {
+                <div class="alert alert-success w-75" role="alert">
+                    Usuario creado exitosamente!
+                </div>
+            }
+            <form [formGroup]="form_register" autocomplete="off" (ngSubmit)="setDataRegister()">
+                <mat-form-field appearance="fill" class="w-75">
+                    <mat-label>Nombre(s) y Apellido(s)</mat-label>
+                    <input type="text" matInput formControlName="name" placeholder="Pepe Lominico">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="w-75">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" placeholder="pat@example.com">
+                </mat-form-field>
+                <mat-form-field class="w-75" appearance="fill">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide" type="button" class="btn btn-outline-link">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <div class="mt-4">
+                    <div class="my-2">
+                        <button mat-button type="button" routerLink="/oauth/login">Ya tienes cuenta? Inicia
+                            Sesión</button>
+                    </div>
+                    <button mat-flat-button type="submit" [disabled]="form_register.invalid || load_form === true">
+                        @if (load_form) {
+                        <i class='bx bx-loader-alt bx-sm bx-spin'></i>
+                        } @else {
+                        Registrate
+                        }
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
